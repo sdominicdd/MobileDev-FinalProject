@@ -5,7 +5,7 @@
 import { View, Text } from "react-native";
 import styles from "./styles";
 
-const NoteListItem = (props) => {
+const NoteSummary = (props) => {
   console.log(props);
   return (
     <View style={styles.widget}>
@@ -22,4 +22,4 @@ const NoteListItem = (props) => {
   );
 };
 
-export default NoteListItem;
+export default NoteSummary;
