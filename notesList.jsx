@@ -8,8 +8,13 @@ import moment from "moment";
 
 const currentTime = moment().format("MMMM DD, YYYY");
 
-const NotesList = () => {
-  const onAddNote = () => {};
+const NotesList = ({ navigation }) => {
+  const onAddNote = () => {
+    navigation.navigate({
+      name: "Create New Note",
+      merge: true,
+    });
+  };
 
   const notebooks = [];
   notebooks.push(

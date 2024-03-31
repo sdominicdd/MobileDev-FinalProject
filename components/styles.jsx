@@ -39,4 +39,34 @@ export default StyleSheet.create({
     color: "#FFFFFF", // Change color as needed
     marginBottom: 10, // Adjust spacing as needed
   },
+
+  /* For CreateNote */
+  pageTitle: {
+    fontSize: 32,
+    fontWeight: "bold",
+    textAlign: "center",
+  },
+  inputContainer: {
+    margin: 2,
+    padding: 2,
+    display: "flex",
+    flexDirection: "column",
+  },
+  titleInput: {
+    borderColor: "gray",
+    borderWidth: 1,
+    borderRadius: 5,
+    padding: 5,
+    margin: 3,
+    marginBottom: 8,
+    fontSize: 22,
+  },
+  contentInput: {
+    borderColor: "gray",
+    borderWidth: 1,
+    borderRadius: 5,
+    padding: 5,
+    margin: 3,
+    fontSize: 22,
+  },
 });
