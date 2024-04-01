@@ -2,8 +2,11 @@
  *
  */
 
-import { View, Text } from "react-native";
+import { View, Text, Button, TouchableOpacity } from "react-native";
+import Icon from "react-native-vector-icons/FontAwesome";
 import styles from "./styles";
+
+import IconButton from "./iconButton";
 
 const NoteSummary = (props) => {
   console.log(props);
@@ -18,6 +21,28 @@ const NoteSummary = (props) => {
         {props.note.content.substring(0, 95)}
         {props.note.content.length > 95 ? "..." : ""}
       </Text>
+
+      <View style={styles.footerBar}>
+        <IconButton
+          onPress={null}
+          iconName="share"
+          buttonText={"Share"}
+        ></IconButton>
+
+        <IconButton
+          style={styles.footerButton}
+          onPress={null}
+          iconName="edit"
+          buttonText={"Edit"}
+        ></IconButton>
+
+        <IconButton
+          style={styles.footerButton}
+          onPress={null}
+          iconName="remove"
+          buttonText={"Delete"}
+        ></IconButton>
+      </View>
     </View>
   );
 };

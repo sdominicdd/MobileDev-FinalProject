@@ -39,6 +39,23 @@ export default StyleSheet.create({
     color: "#FFFFFF", // Change color as needed
     marginBottom: 10, // Adjust spacing as needed
   },
+  footerBar: {
+    display: "flex",
+    flexDirection: "row",
+    padding: 3,
+  },
+  footerButton: {
+    flex: 1,
+    margin: 2,
+    padding: 2,
+    backgroundColor: "#107896",
+    alignItems: "center",
+  },
+  iconButtonText: {
+    fontSize: 12,
+    fontWeight: "bold",
+    color: "#FFFFFF", // Change color as needed
+  },
 
   /* For CreateOrEditNote */
   pageTitle: {
