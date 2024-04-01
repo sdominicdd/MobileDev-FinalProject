@@ -1,7 +1,7 @@
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 
-import CreateNote from "./components/createNote";
+import CreateOrEditNote from "./components/createOrEdit";
 import NotesList from "./notesList";
 
 import styles from "./components/styles";
@@ -14,7 +14,7 @@ export default function App() {
         <Stack.Screen name="Notes List" component={NotesList}></Stack.Screen>
         <Stack.Screen
           name="Create New Note"
-          component={CreateNote}
+          component={CreateOrEditNote}
         ></Stack.Screen>
       </Stack.Navigator>
     </NavigationContainer>

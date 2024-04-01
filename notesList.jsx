@@ -1,6 +1,7 @@
 import { FlatList, StyleSheet, Text, View, Button } from "react-native";
 import NoteSummary from "./components/noteSummary";
-import CreateNote from "./components/createNote";
+
+import CreateOrEditNote from "./components/createOrEdit";
 
 import styles from "./components/styles";
 

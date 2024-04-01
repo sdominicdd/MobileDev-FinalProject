@@ -40,7 +40,7 @@ export default StyleSheet.create({
     marginBottom: 10, // Adjust spacing as needed
   },
 
-  /* For CreateNote */
+  /* For CreateOrEditNote */
   pageTitle: {
     fontSize: 32,
     fontWeight: "bold",
