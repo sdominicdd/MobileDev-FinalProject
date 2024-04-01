@@ -1,5 +1,8 @@
 import { FlatList, StyleSheet, Text, View, Button } from "react-native";
 import NoteSummary from "./components/noteSummary";
+import { useReducer, useEffect } from "react";
+
+import * as utils from "./components/utilites";
 
 import CreateOrEditNote from "./components/createOrEdit";
 
@@ -9,7 +12,33 @@ import moment from "moment";
 
 const currentTime = moment().format("MMMM DD, YYYY");
 
-const NotesList = ({ navigation }) => {
+const NotesList = ({ navigation, route }) => {
+  const initialState = {
+    notes: [],
+  };
+
+  const [state, dispatch] = useReducer(utils.reducer, initialState);
+
+  useEffect(() => {
+    console.log("useEffect: " + route.params);
+    if (route.params != undefined) {
+      let existingNotes = state.notes;
+      var existingIndex = existingNotes.findIndex(
+        (note) => note.id == route.params.id
+      );
+
+      if (existingIndex == -1) {
+        existingNotes.push(route.params);
+      } else {
+        existingNotes[existingIndex] = route.params;
+      }
+
+      dispatch({
+        notes: existingNotes,
+      });
+    }
+  }, [route.params]);
+
   const onAddNote = () => {
     navigation.navigate({
       name: "Create New Note",
@@ -17,34 +46,10 @@ const NotesList = ({ navigation }) => {
     });
   };
 
-  const notebooks = [];
-  notebooks.push(
-    {
-      noteTitle: "C++",
-      noteContent:
-        "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s",
-      createdTime: currentTime,
-    },
-    {
-      noteTitle: "Java",
-      noteContent:
-        "It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters",
-      createdTime: currentTime,
-    },
-    {
-      noteTitle: "Python",
-      noteContent:
-        "There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour,",
-      createdTime: currentTime,
-    }
-  );
-
-  console.log("Size of array is " + notebooks.length);
-
   return (
     <View>
       <FlatList
-        data={notebooks}
+        data={state.notes}
         renderItem={({ item }) => <NoteSummary note={item} />}
         keyExtractor={(item) => item.id}
       />

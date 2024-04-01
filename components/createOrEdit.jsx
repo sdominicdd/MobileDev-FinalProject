@@ -6,6 +6,8 @@ import uuid from "react-native-uuid";
 
 import * as utils from "./utilites.js";
 
+import moment from "moment";
+
 const CreateOrEditNote = ({ navigation, route }) => {
   const initialState = {
     id: uuid.v4(),
@@ -46,7 +48,12 @@ const CreateOrEditNote = ({ navigation, route }) => {
   const onSave = () => {
     navigation.navigate({
       name: "Notes List",
-      params: { id: state.id, title: state.titleInput, content: state.content },
+      params: {
+        id: state.id,
+        title: state.titleInput,
+        content: state.contentInput,
+        time: moment().format("MMMM DD, YYYY"),
+      },
       merge: true,
     });
   };
