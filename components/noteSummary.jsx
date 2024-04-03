@@ -4,12 +4,16 @@
 
 import { View, Text, Button, TouchableOpacity } from "react-native";
 import Icon from "react-native-vector-icons/FontAwesome";
+
 import styles from "./styles";
 
 import IconButton from "./iconButton";
 
 const NoteSummary = (props) => {
-  console.log(props);
+  const EditNote = () => {
+    props.onEditNote(props.note.id);
+  };
+
   return (
     <View style={styles.widget}>
       <View style={styles.widgetTitleBar}>
@@ -31,14 +35,16 @@ const NoteSummary = (props) => {
 
         <IconButton
           style={styles.footerButton}
-          onPress={null}
+          onPress={EditNote}
           iconName="edit"
           buttonText={"Edit"}
         ></IconButton>
 
         <IconButton
           style={styles.footerButton}
-          onPress={null}
+          onPress={() => {
+            props.onDeleteNote(props.note.id);
+          }}
           iconName="remove"
           buttonText={"Delete"}
         ></IconButton>

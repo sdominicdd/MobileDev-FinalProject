@@ -1,4 +1,4 @@
-import { useReducer } from "react";
+import { useReducer, useEffect } from "react";
 import { View, Text, TextInput, Button } from "react-native";
 import styles from "./styles.jsx";
 
@@ -16,10 +16,7 @@ const CreateOrEditNote = ({ navigation, route }) => {
     isSaveBtnActive: false,
   };
 
-  const [state, dispatch] = useReducer(
-    utils.reducer,
-    route.note === undefined ? initialState : route.note
-  );
+  const [state, dispatch] = useReducer(utils.reducer, initialState);
 
   // Method to check if inputs for title and content are valid, if yes. Button will be enabled
   const onInput = (input) => {
@@ -58,10 +55,11 @@ const CreateOrEditNote = ({ navigation, route }) => {
     });
   };
 
+  console.log("state is " + JSON.stringify(state));
   return (
     <View>
       <Text style={styles.pageTitle}>
-        {route.note === undefined ? "Create a new note" : "Edit note"}
+        {route.params === undefined ? "Create a new note" : "Edit note"}
       </Text>
       <View style={styles.inputContainer}>
         <TextInput

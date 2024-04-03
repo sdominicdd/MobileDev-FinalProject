@@ -46,11 +46,36 @@ const NotesList = ({ navigation, route }) => {
     });
   };
 
+  const onEditNote = (id) => {
+    console.log("onEditNote: " + id);
+    let note = state.notes.filter((note) => note.id == id);
+    console.log(note);
+    navigation.navigate({
+      name: "Create New Note",
+      params: { note: note },
+      merge: true,
+    });
+  };
+
+  const onDeleteNote = (id) => {
+    console.log("onDelete: " + id);
+    let notes = state.notes.filter((note) => note.id !== id); // Corrected line
+    dispatch({
+      notes: notes,
+    });
+  };
+
   return (
     <View>
       <FlatList
         data={state.notes}
-        renderItem={({ item }) => <NoteSummary note={item} />}
+        renderItem={({ item }) => (
+          <NoteSummary
+            note={item}
+            onEditNote={onEditNote}
+            onDeleteNote={onDeleteNote}
+          />
+        )}
         keyExtractor={(item) => item.id}
       />
       <View>
