@@ -2,8 +2,9 @@
  *
  */
 
-import { View, Text, Button, TouchableOpacity } from "react-native";
+import { View, Text, Button, TouchableOpacity, Alert } from "react-native";
 import Icon from "react-native-vector-icons/FontAwesome";
+import * as SMS from "expo-sms";
 
 import styles from "./styles";
 
@@ -12,6 +13,19 @@ import IconButton from "./iconButton";
 const NoteSummary = (props) => {
   const EditNote = () => {
     props.onEditNote(props.note.id);
+  };
+
+  const sendSMS = async () => {
+    let isAvailable = await SMS.isAvailableAsync();
+    if (isAvailable) {
+      const { result } = await SMS.sendSMSAsync(
+        [""],
+        `Title:${props.note.title}\nNote:${props.note.content}`
+      );
+      console.log(result);
+    } else {
+      Alert("SMS not available on this device.");
+    }
   };
 
   return (
@@ -28,9 +42,9 @@ const NoteSummary = (props) => {
 
       <View style={styles.footerBar}>
         <IconButton
-          onPress={null}
+          onPress={sendSMS}
           iconName="share"
-          buttonText={"Share"}
+          buttonText={"SMS"}
         ></IconButton>
 
         <IconButton
