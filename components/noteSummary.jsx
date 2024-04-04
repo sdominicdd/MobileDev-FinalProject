@@ -36,7 +36,7 @@ const NoteSummary = (props) => {
         let options = {
           recipients: ["stanleydominicdd@gmail.com"],
           subject: "Sharing a note created by me",
-          body: "Hello",
+          body: `Title:${props.note.title}\nNote:${props.note.content}`,
         };
         MailComposer.composeAsync(options).then((result) => {
           console.log(result.status);

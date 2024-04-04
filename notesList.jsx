@@ -66,20 +66,22 @@ const NotesList = ({ navigation, route }) => {
   };
 
   return (
-    <View>
-      <FlatList
-        data={state.notes}
-        renderItem={({ item }) => (
-          <NoteSummary
-            note={item}
-            onEditNote={onEditNote}
-            onDeleteNote={onDeleteNote}
-          />
-        )}
-        keyExtractor={(item) => item.id}
-      />
-      <View>
+    <View style={styles.notesListContainer}>
+      <View style={styles.addNoteButton}>
         <Button title="Add a note" onPress={onAddNote}></Button>
+      </View>
+      <View style={styles.notesList}>
+        <FlatList
+          data={state.notes}
+          renderItem={({ item }) => (
+            <NoteSummary
+              note={item}
+              onEditNote={onEditNote}
+              onDeleteNote={onDeleteNote}
+            />
+          )}
+          keyExtractor={(item) => item.id}
+        />
       </View>
     </View>
   );

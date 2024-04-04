@@ -30,6 +30,7 @@ export default StyleSheet.create({
     fontSize: 15,
     fontWeight: "bold",
     color: "#FFFFFF", // Change color as needed
+    textAlign: "right",
 
     flex: 2,
   },
@@ -58,10 +59,15 @@ export default StyleSheet.create({
   },
 
   /* For CreateOrEditNote */
+  createContainer: {
+    backgroundColor: "#EFD469",
+    height: "100vh",
+  },
   pageTitle: {
-    fontSize: 32,
+    fontSize: 30,
     fontWeight: "bold",
     textAlign: "center",
+    color: "#373D3F",
   },
   inputContainer: {
     margin: 2,
@@ -70,20 +76,28 @@ export default StyleSheet.create({
     flexDirection: "column",
   },
   titleInput: {
-    borderColor: "gray",
+    borderColor: "#373D3Fks",
     borderWidth: 1,
     borderRadius: 5,
     padding: 5,
     margin: 3,
     marginBottom: 8,
-    fontSize: 22,
+    fontSize: 20,
+    color: "#093145",
   },
   contentInput: {
-    borderColor: "gray",
+    borderColor: "black",
     borderWidth: 1,
     borderRadius: 5,
     padding: 5,
     margin: 3,
-    fontSize: 22,
+    fontSize: 18,
+    color: "#093145",
+    textAlignVertical: "top", // To align text at the top
+  },
+
+  /**For the notes list page */
+  notesList: {
+    overflow: "scroll",
   },
 });

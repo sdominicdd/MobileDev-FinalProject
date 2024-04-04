@@ -54,10 +54,8 @@ const CreateOrEditNote = ({ navigation, route }) => {
       merge: true,
     });
   };
-
-  console.log("state is " + JSON.stringify(state));
   return (
-    <View>
+    <View style={styles.createContainer}>
       <Text style={styles.pageTitle}>
         {route.params === undefined ? "Create a new note" : "Edit note"}
       </Text>
@@ -79,6 +77,7 @@ const CreateOrEditNote = ({ navigation, route }) => {
             onInput({ for: "content", val: val });
           }}
           numberOfLines={4}
+          multiline={true}
         ></TextInput>
 
         <Button
