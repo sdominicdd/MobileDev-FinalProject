@@ -52,7 +52,7 @@ const NotesList = ({ navigation, route }) => {
     console.log(note);
     navigation.navigate({
       name: "Create New Note",
-      params: { note: note },
+      params: note,
       merge: true,
     });
   };

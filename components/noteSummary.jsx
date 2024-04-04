@@ -5,6 +5,7 @@
 import { View, Text, Button, TouchableOpacity, Alert } from "react-native";
 import Icon from "react-native-vector-icons/FontAwesome";
 import * as SMS from "expo-sms";
+import * as MailComposer from "expo-mail-composer";
 
 import styles from "./styles";
 
@@ -25,6 +26,26 @@ const NoteSummary = (props) => {
       console.log(result);
     } else {
       Alert("SMS not available on this device.");
+    }
+  };
+
+  const sendEmail = async () => {
+    try {
+      let isAvailable = await MailComposer.isAvailableAsync();
+      if (isAvailable) {
+        let options = {
+          recipients: ["stanleydominicdd@gmail.com"],
+          subject: "Sharing a note created by me",
+          body: "Hello",
+        };
+        MailComposer.composeAsync(options).then((result) => {
+          console.log(result.status);
+        });
+      } else {
+        console.log("Email not available on this device.");
+      }
+    } catch (ex) {
+      console.log(ex);
     }
   };
 
@@ -49,9 +70,9 @@ const NoteSummary = (props) => {
 
         <IconButton
           style={styles.footerButton}
-          onPress={EditNote}
-          iconName="edit"
-          buttonText={"Edit"}
+          onPress={sendEmail}
+          iconName="share"
+          buttonText={"Email"}
         ></IconButton>
 
         <IconButton
