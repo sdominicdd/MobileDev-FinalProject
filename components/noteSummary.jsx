@@ -2,7 +2,16 @@
  *
  */
 
-import { View, Text, Button, TouchableOpacity, Alert } from "react-native";
+import { useState } from "react";
+import {
+  View,
+  Text,
+  Button,
+  TouchableOpacity,
+  Alert,
+  Pressable,
+  Modal,
+} from "react-native";
 import Icon from "react-native-vector-icons/FontAwesome";
 import * as SMS from "expo-sms";
 import * as MailComposer from "expo-mail-composer";
@@ -12,6 +21,8 @@ import styles from "./styles";
 import IconButton from "./iconButton";
 
 const NoteSummary = (props) => {
+  const [modalVisible, setModalVisible] = useState(false);
+
   const EditNote = () => {
     props.onEditNote(props.note.id);
   };
@@ -49,42 +60,48 @@ const NoteSummary = (props) => {
     }
   };
 
+  const onSummaryClicked = () => {
+    Alert.alert(props.note.title, props.note.content);
+  };
+
   return (
-    <View style={styles.widget}>
-      <View style={styles.widgetTitleBar}>
-        <Text style={styles.widgetTitle}>{props.note.title}</Text>
-        <Text style={styles.createdTimeLabel}>{props.note.time}</Text>
+    <Pressable onPress={onSummaryClicked}>
+      <View style={styles.widget}>
+        <View style={styles.widgetTitleBar}>
+          <Text style={styles.widgetTitle}>{props.note.title}</Text>
+          <Text style={styles.createdTimeLabel}>{props.note.time}</Text>
+        </View>
+
+        <Text style={styles.noteContent}>
+          {props.note.content.substring(0, 95)}
+          {props.note.content.length > 95 ? "..." : ""}
+        </Text>
+
+        <View style={styles.footerBar}>
+          <IconButton
+            onPress={sendSMS}
+            iconName="share"
+            buttonText={"SMS"}
+          ></IconButton>
+
+          <IconButton
+            style={styles.footerButton}
+            onPress={sendEmail}
+            iconName="share"
+            buttonText={"Email"}
+          ></IconButton>
+
+          <IconButton
+            style={styles.footerButton}
+            onPress={() => {
+              props.onDeleteNote(props.note.id);
+            }}
+            iconName="remove"
+            buttonText={"Delete"}
+          ></IconButton>
+        </View>
       </View>
-
-      <Text style={styles.noteContent}>
-        {props.note.content.substring(0, 95)}
-        {props.note.content.length > 95 ? "..." : ""}
-      </Text>
-
-      <View style={styles.footerBar}>
-        <IconButton
-          onPress={sendSMS}
-          iconName="share"
-          buttonText={"SMS"}
-        ></IconButton>
-
-        <IconButton
-          style={styles.footerButton}
-          onPress={sendEmail}
-          iconName="share"
-          buttonText={"Email"}
-        ></IconButton>
-
-        <IconButton
-          style={styles.footerButton}
-          onPress={() => {
-            props.onDeleteNote(props.note.id);
-          }}
-          iconName="remove"
-          buttonText={"Delete"}
-        ></IconButton>
-      </View>
-    </View>
+    </Pressable>
   );
 };
 

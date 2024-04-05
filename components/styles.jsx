@@ -76,7 +76,7 @@ export default StyleSheet.create({
     flexDirection: "column",
   },
   titleInput: {
-    borderColor: "#373D3Fks",
+    borderColor: "#373D3F",
     borderWidth: 1,
     borderRadius: 5,
     padding: 5,
@@ -86,7 +86,7 @@ export default StyleSheet.create({
     color: "#093145",
   },
   contentInput: {
-    borderColor: "black",
+    borderColor: "#373D3F",
     borderWidth: 1,
     borderRadius: 5,
     padding: 5,
