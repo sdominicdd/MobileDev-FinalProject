@@ -20,7 +20,8 @@
     "react-native-uuid": "^2.0.2",
     "react-native-vector-icons": "^10.0.3",
     "expo-mail-composer": "~12.7.1",
-    "expo-file-system": "~16.0.8"
+    "expo-file-system": "~16.0.8",
+    "react-native-gesture-handler": "~2.14.0"
   },
   "devDependencies": {
     "@babel/core": "^7.20.0"

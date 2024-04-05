@@ -39,16 +39,16 @@ const NotesList = ({ navigation, route }) => {
       });
 
       // Write state to file
-      writeNotesToFile();
+      writeNotesToFile(existingNotes);
     }
 
     ReadNotesFromFile();
   }, [route.params]);
 
-  const writeNotesToFile = async () => {
+  const writeNotesToFile = async (notes) => {
     await FileSystem.writeAsStringAsync(
       FileSystem.documentDirectory + "notes",
-      JSON.stringify(state.notes)
+      JSON.stringify(notes)
     );
     console.log("Write to file completed ");
   };
@@ -88,11 +88,12 @@ const NotesList = ({ navigation, route }) => {
       notes: notes,
     });
     // Write state to file
-    writeNotesToFile();
+    writeNotesToFile(notes);
   };
 
   return (
     <View style={styles.notesListContainer}>
+      <Text style={styles.pageTitle}>s_dominic</Text>
       <View style={styles.addNoteButton}>
         <Button title="Add a note" onPress={onAddNote}></Button>
       </View>
