@@ -12,6 +12,8 @@ import moment from "moment";
 
 const currentTime = moment().format("MMMM DD, YYYY");
 
+import * as FileSystem from "expo-file-system";
+
 const NotesList = ({ navigation, route }) => {
   const initialState = {
     notes: [],
@@ -20,7 +22,6 @@ const NotesList = ({ navigation, route }) => {
   const [state, dispatch] = useReducer(utils.reducer, initialState);
 
   useEffect(() => {
-    console.log("useEffect: " + route.params);
     if (route.params != undefined) {
       let existingNotes = state.notes;
       var existingIndex = existingNotes.findIndex(
@@ -36,8 +37,31 @@ const NotesList = ({ navigation, route }) => {
       dispatch({
         notes: existingNotes,
       });
+
+      // Write state to file
+      writeNotesToFile();
     }
+
+    ReadNotesFromFile();
   }, [route.params]);
+
+  const writeNotesToFile = async () => {
+    await FileSystem.writeAsStringAsync(
+      FileSystem.documentDirectory + "notes",
+      JSON.stringify(state.notes)
+    );
+    console.log("Write to file completed ");
+  };
+
+  const ReadNotesFromFile = async () => {
+    var fileContents = await FileSystem.readAsStringAsync(
+      FileSystem.documentDirectory + "notes"
+    );
+    console.log("file read done." + fileContents);
+    dispatch({
+      notes: JSON.parse(fileContents),
+    });
+  };
 
   const onAddNote = () => {
     navigation.navigate({
@@ -63,6 +87,8 @@ const NotesList = ({ navigation, route }) => {
     dispatch({
       notes: notes,
     });
+    // Write state to file
+    writeNotesToFile();
   };
 
   return (
@@ -72,7 +98,7 @@ const NotesList = ({ navigation, route }) => {
       </View>
       <View style={styles.notesList}>
         <FlatList
-          data={state.notes}
+          data={state.notes.reverse()}
           renderItem={({ item }) => (
             <NoteSummary
               note={item}
